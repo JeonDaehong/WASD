@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASD Game</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    <script src="logo.js"></script>
+    <script src="loading.js"></script>
+    <link rel="stylesheet" type="text/css" href="wasd.css">
+</head>
+<body>
+    <div class="header">
+        <div>
+            <span class="title_Span">WASD Game</span>
+        </div>
+    </div>
+    <div class="body">
+        <div id="wasd"></div>
+    </div>
+    <script>
+
+        const gameConfig = {
+            type: Phaser.AUTO,
+            parent: "wasd",
+            width: 800,
+            height: 600,
+            backgroundColor: "black",
+            audio: {
+                disableWebAudio: true
+            },
+            scene: [
+                WASD_LOGO,
+                WASD_LOADING
+            ],
+            autoCenter: Phaser.Scale.CENTER_BOTH // Phaser Canvas를 Center에 위치.
+        };
+
+        const game = new Phaser.Game(gameConfig);
+
+    </script>
+    <div class="footer">
+
+    </div>
+</body>
+</html>
