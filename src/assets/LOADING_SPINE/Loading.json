@@ -1,0 +1,59 @@
+{
+"loading" : {
+	"skeleton": {
+		"hash": "5Nxyauo8nVqZI8FdJB1xXSq1G28",
+		"spine": "3.8.99",
+		"x": -250,
+		"y": -250,
+		"width": 500,
+		"height": 500,
+		"images": "./roading/",
+		"audio": ""
+	},
+	"bones": [
+		{ "name": "root" }
+	],
+	"slots": [
+		{ "name": "1", "bone": "root", "attachment": "6" }
+	],
+	"skins": [
+		{
+			"name": "default",
+			"attachments": {
+				"1": {
+					"1": { "width": 500, "height": 500 },
+					"2": { "width": 500, "height": 500 },
+					"3": { "width": 500, "height": 500 },
+					"4": { "width": 500, "height": 500 },
+					"5": { "width": 500, "height": 500 },
+					"6": { "width": 500, "height": 500 }
+				}
+			}
+		}
+	],
+	"animations": {
+		"animation": {
+			"slots": {
+				"1": {
+					"attachment": [
+						{ "name": "1" },
+						{ "time": 0.1333, "name": "2" },
+						{ "time": 0.2667, "name": "3" },
+						{ "time": 0.4333, "name": "4" },
+						{ "time": 0.5667, "name": "5" },
+						{ "time": 0.7, "name": "6" },
+						{ "time": 0.8333, "name": "6" }
+					]
+				}
+			},
+			"bones": {
+				"root": {
+					"scale": [
+						{ "x": 0.315, "y": 0.315 }
+					]
+				}
+			}
+		}
+	}
+}
+}
