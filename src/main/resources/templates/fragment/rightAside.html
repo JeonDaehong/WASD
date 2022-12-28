@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="rightAside" th:fragment="commonRightAside" style="text-align: center;">
+  <div th:align="right" class="container-sm menu" style="height: 100vh;">
+    <div th:align="center" class="bug_div_button">
+      <span class="bug_span">버그 신고</span>
+      <img th:src="@{/img/bug_report.png}" alt="example" width="40px" height="40px" style="margin-left: 10px; position: relative; bottom: 5px;">
+    </div>
+    <div class="mt-4">
+      <img th:src="@{/img/example_maegu.png}" alt="example" width="90%" height="800px" style="cursor: pointer;">
+    </div>
+  </div>
+</div>
+</html>

@@ -1,0 +1,76 @@
+{
+"skeleton": { "hash": "7XDuYklx2wYwnJ63iuVZkg4UlWk", "spine": "3.8.99", "images": "", "audio": "" },
+"bones": [
+	{ "name": "root" },
+	{
+		"name": "effect",
+		"parent": "root",
+		"x": -454.94,
+		"y": 432.19,
+		"scaleX": 1.4903,
+		"scaleY": 1.548,
+		"color": "ff0000ff"
+	},
+	{ "name": "뼈", "parent": "effect", "length": 539.24, "rotation": -2.6 }
+],
+"slots": [
+	{ "name": "effect/wep1_effect_1/wep1_effect_00000", "bone": "뼈" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"effect/wep1_effect_1/wep1_effect_00000": {
+				"effect/wep1_effect_1/wep1_effect_00001": { "width": 2000, "height": 2000 },
+				"effect/wep1_effect_1/wep1_effect_00002": { "width": 2000, "height": 2000 },
+				"effect/wep1_effect_1/wep1_effect_00003": { "width": 2000, "height": 2000 },
+				"effect/wep1_effect_1/wep1_effect_00004": { "width": 2000, "height": 2000 },
+				"effect/wep1_effect_1/wep1_effect_00005": { "width": 2000, "height": 2000 },
+				"effect/wep1_effect_1/wep1_effect_00006": { "width": 2000, "height": 2000 },
+				"effect/wep1_effect_1/wep1_effect_00007": { "width": 2000, "height": 2000 },
+				"effect/wep1_effect_1/wep1_effect_00008": { "width": 2000, "height": 2000 },
+				"effect/wep1_effect_1/wep1_effect_00009": { "width": 2000, "height": 2000 },
+				"effect/wep1_effect_1/wep1_effect_00010": { "width": 2000, "height": 2000 },
+				"effect/wep1_effect_1/wep1_effect_00011": { "width": 2000, "height": 2000 }
+			}
+		}
+	}
+],
+"animations": {
+	"melee_attack": {
+		"slots": {
+			"effect/wep1_effect_1/wep1_effect_00000": {
+				"attachment": [
+					{ "name": "effect/wep1_effect_1/wep1_effect_00001" },
+					{ "time": 0.0333, "name": "effect/wep1_effect_1/wep1_effect_00002" },
+					{ "time": 0.0667, "name": "effect/wep1_effect_1/wep1_effect_00003" },
+					{ "time": 0.1, "name": "effect/wep1_effect_1/wep1_effect_00004" },
+					{ "time": 0.1333, "name": "effect/wep1_effect_1/wep1_effect_00005" },
+					{ "time": 0.1667, "name": "effect/wep1_effect_1/wep1_effect_00006" },
+					{ "time": 0.2, "name": "effect/wep1_effect_1/wep1_effect_00007" },
+					{ "time": 0.2333, "name": "effect/wep1_effect_1/wep1_effect_00008" },
+					{ "time": 0.2667, "name": "effect/wep1_effect_1/wep1_effect_00009" },
+					{ "time": 0.3, "name": "effect/wep1_effect_1/wep1_effect_00010" },
+					{ "time": 0.3333, "name": "effect/wep1_effect_1/wep1_effect_00011" },
+					{ "time": 0.3667, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"effect": {
+				"translate": [
+					{ "x": 516, "y": 186, "curve": 0.124, "c2": 0.14, "c3": 0.75 },
+					{ "time": 0.3333, "x": -72, "y": 288 }
+				],
+				"scale": [
+					{ "x": 1.3, "y": 1.24 },
+					{ "time": 0.3333, "x": 2.007, "y": 1.914 }
+				]
+			}
+		}
+	},
+	"melee_move": {},
+	"melee_stby": {},
+	"noweapon_idle": {}
+}
+}

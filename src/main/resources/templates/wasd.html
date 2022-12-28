@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASD Game</title>
+    <script src="phaser/phaser.js"></script>
+    <script src="plugins/SpinePluginDebug.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/wasd.css">
+</head>
+<body>
+    <div class="header">
+        <div>
+            <span class="title_Span">WASD Game</span>
+        </div>
+    </div>
+    <div class="body">
+        <div id="wasd"></div>
+    </div>
+    <script>
+        // 스파인 오브젝트 기본 Class
+        class SpineObject
+        {
+            constructor(scene, x, y, key, animationName, loop){
+                //this.scene = scene;
+                this.spine = scene.add.spine(x, y, key, animationName, loop);
+            }
+
+            getAttachments(){
+                return this.spine.skeleton.skin.attachments;
+            }
+          
+            getSlots(){
+                return this.spine.skeleton.slots;
+            }
+          
+            setAttachment(slotName, attachmentName){
+                this.spine.skeleton.setAttachment(slotName, attachmentName);
+            }
+          
+            setSkin(skinName){
+                this.spine.setSkin(null);
+                this.spine.setSkinByName(skinName);
+            }
+            
+            setAnimation(track = 0, animation, loop = false, delay = 0){
+                this.spine.setAnimation(track, animation, loop, delay);
+            }
+
+            setScale(x, y){
+                this.spine.scaleX = x;
+                this.spine.scaleY = y;
+            }
+        }
+
+        // 캐릭터 Class
+        class CharacterObject extends SpineObject
+        {
+            constructor(scene, x, y, key, animationName = '', loop = false) {
+                super(scene, x, y, key, animationName, loop);
+                this.nowAnimationName = animationName;
+                this.playerSpeed = 40;
+            }
+            
+            move(x = 0, y = 0){
+                this.spine.body.velocity.x = x;
+                this.spine.y += y;
+                this.spine.skeleton.bones[1].data.x += x;
+                //console.log(this.spine.skeleton.bones[1].data.x)
+            }
+            attack(){
+                this.setAnimation(1, 'melee_attack', true, 0);
+            }
+            setNowAnimationName(animationName){
+                this.nowAnimationName = animationName;
+            }
+            getNowAnimationName(){
+                return this.nowAnimationName;
+            }
+            setPlayerMoveSpeed(speed){
+                this.playerSpeed = speed;
+            }
+            getPlayerMoveSpeed(){
+                return this.playerSpeed;
+            }
+            setOffset(x, y){
+                this.spine.body.setOffset(x, y);
+            }
+            setVelocity(x, y){
+                this.spine.body.setVelocity(x, y);
+            }
+            setBounce(x, y){
+                this.spine.body.setBounce(x, y);
+            }
+            setCollideWorldBounds(flag = true){
+                this.spine.body.setCollideWorldBounds(flag);
+            }
+        }
+
+        // 1. 로고 Scene
+        class WASD_LOGO extends Phaser.Scene {
+        
+            constructor(){
+                super({ key: 'WASD_LOGO' });
+            }
+        
+            preload(){
+                this.load.image('logo', 'img/wasd_logo.png'); // logo image preload
+            }
+        
+            create(){
+                let logo = this.add.image(400, 300, 'logo'); // logo image create
+        
+                // logo image width, height amend
+                logo.displayWidth = 400;
+                logo.displayHeight = 300;
+        
+                // fade in
+                this.cameras.main.fadeIn(1200, 0, 0, 0);
+        
+                // 2초 후 fade out
+                setTimeout(() => this.cameras.main.fadeOut(1200, 0, 0, 0), 2000);
+        
+                this.time.addEvent({
+                    delay: 3000,
+                    loop: false,
+                    callback: () => {
+                        this.scene.start("WASD_LOADING");
+                    }
+                });
+            }
+        }
+        
+        // 2. 로딩 Scene
+        class WASD_LOADING extends Phaser.Scene
+        {
+            constructor(WASD_LOADING){
+                super({ key: 'WASD_LOADING' });
+            }
+
+            preload(){
+                this.load.setPath('assets/LOADING_SPINE/');
+                this.load.spine('Loading', 'Loading.json', ['Loading.atlas'], true);
+
+                this.load.setPath('assets/LOADING_TEXT/');
+                this.load.spine('Loading_Text', 'Loading_TEXT.json', ['Loading_TEXT.atlas'], true);
+            }
+
+            create(){
+                let loadingSpine = new SpineObject(this, 400, 200, 'Loading.loading', 'animation', true);
+                let loadingTextSpine = new SpineObject(this, 400, 400, 'Loading_Text.loading', 'animation', true);
+
+                this.time.addEvent({
+                    delay: 3000,
+                    loop: false,
+                    callback: () => {
+                        this.scene.start("STAGE_1");
+                    }
+                });
+            }
+        }
+        
+        let keyW;
+        let keyA;
+        let keyS;
+        let keyD;
+        let keySpace;
+        let player;
+        let keyDownState = '';
+        // 3. Stage1 Scene
+        class STAGE_1 extends Phaser.Scene
+        {
+            constructor(STAGE_1){
+                super({ key: 'STAGE_1' });
+                
+            }
+            
+            preload(){
+                this.load.setPath('assets/CHARACTER/MAIN/');
+                this.load.spine('myCharacter', 'character.json', ['character.atlas'], true);
+            }
+
+            create(){
+                player =  new CharacterObject(this, 400, 600, 'myCharacter.character');
+
+                player.setSkin('skin1');
+                player.setScale(3, 3);
+                player.setAttachment('emotion', 'emo_hurt');
+                player.setAnimation('melee_move', true);
+                
+                this.physics.add.existing(player.spine);
+                player.setOffset(0, 0);
+                //player.setVelocity(250, 500);
+                //player.setBounce(1, 1);
+                player.setCollideWorldBounds();
+                
+                keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+                keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+                keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+                keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+                keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+                console.log(player)
+            }
+
+            update(){
+                if (keyA.isDown && keyW.isDown) {
+                    if (player.getNowAnimationName() !== 'melee_move') {
+                        player.setNowAnimationName('melee_move')
+                        console.log(player.getNowAnimationName())
+                        player.setAnimation(0, player.getNowAnimationName(), true);
+                    }
+                    player.move(-player.getPlayerMoveSpeed(), -player.getPlayerMoveSpeed());
+
+                } else if (keyW.isDown && keyD.isDown) {
+                    if (player.getNowAnimationName() !== 'melee_move') {
+                        player.setNowAnimationName('melee_move')
+                        player.setAnimation(0, player.getNowAnimationName(), true);
+                    }
+                    player.move(player.getPlayerMoveSpeed(), -player.getPlayerMoveSpeed());
+
+                } else if (keyD.isDown && keyS.isDown) {
+                    if (player.getNowAnimationName() !== 'melee_move') {
+                        player.setNowAnimationName('melee_move')
+                        player.setAnimation(0, player.getNowAnimationName(), true);
+                    }
+                    player.move(player.getPlayerMoveSpeed(), player.getPlayerMoveSpeed());
+
+                } else if (keyS.isDown && keyA.isDown) {
+                    if (player.getNowAnimationName() !== 'melee_move') {
+                        player.setNowAnimationName('melee_move')
+                        player.setAnimation(0, player.getNowAnimationName(), true);
+                    }
+                    player.move(-player.getPlayerMoveSpeed(), player.getPlayerMoveSpeed());
+
+                } else if (keyA.isDown) {
+                    if (player.getNowAnimationName() !== 'melee_move') {
+                        player.setNowAnimationName('melee_move')
+                        player.setAnimation(0, player.getNowAnimationName(), true);
+                    }
+                    player.move(-player.getPlayerMoveSpeed(), 0);
+
+                } else if (keyS.isDown) {
+                    if (player.getNowAnimationName() !== 'melee_move') {
+                        player.setNowAnimationName('melee_move')
+                        player.setAnimation(0, player.getNowAnimationName(), true);
+                    }
+                    player.move(0, player.getPlayerMoveSpeed());
+
+                } else if (keyD.isDown) {
+                    if (player.getNowAnimationName() !== 'melee_move') {
+                        player.setNowAnimationName('melee_move')
+                        player.setAnimation(0, player.getNowAnimationName(), true);
+                    }
+                    player.move(player.getPlayerMoveSpeed(), 0);
+
+                } else if (keyW.isDown) {
+                    if (player.getNowAnimationName() !== 'melee_move') {
+                        player.setNowAnimationName('melee_move')
+                        console.log(player.getNowAnimationName())
+                        player.setAnimation(0, player.getNowAnimationName(), true);
+                    }
+                    player.move(0, -player.getPlayerMoveSpeed());
+                } else if (keySpace.isDown) {
+                    //console.log(player.spine);
+                    if (player.getNowAnimationName() !== 'melee_attack') {
+                        player.setNowAnimationName('melee_attack')
+                        player.attack();
+                    }
+                } else {
+                    if (player.getNowAnimationName() !== 'melee_stby') {
+                        player.setNowAnimationName('melee_stby')
+                        player.spine.clearTracks(1);
+                        player.setAnimation(0, player.getNowAnimationName(), true);
+                    }
+                }
+            }
+        }
+
+        const SpinePlugin = {
+            scene: [
+                {key: 'SpinePlugin', plugin: window.SpinePlugin, mapping: 'spine'}
+            ]
+        };
+        // Main Game (WASD)
+        const gameConfig = {
+            type: Phaser.AUTO,
+            parent: "wasd",
+            width: 800,
+            height: 600,
+            backgroundColor: "ffffff",
+            scene: [
+                //WASD_LOGO,
+                //WASD_LOADING,
+                STAGE_1
+            ],
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    debug: true,
+                    gravity: { y: 2 }
+                }
+            },
+            plugins: SpinePlugin,
+            autoCenter: Phaser.Scale.CENTER_BOTH // Phaser Canvas를 Center에 위치.
+        };
+
+        // 게임 불러오기
+        const game = new Phaser.Game(gameConfig);
+
+    </script>
+    <div class="footer">
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://daehong:EDS4kkaoNi7vg1OR@wasdcluster.0vggb3k.mongodb.net/WASD

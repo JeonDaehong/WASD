@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html 	 lang="ko"
+         xmlns:th="http://www.thymeleaf.org"
+         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+         layout:decorate="~{layout/default_layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280">
+    <title>MainPage</title>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+
+            // 게임 페이지로 이동
+            function goPlayGame() { location.href = "/wasdGame"; }
+
+        </script>
+    </th:block>
+    <th:block layout:fragment="css">
+        <style>
+            body {
+                margin : 0;
+                padding : 0;
+            }
+
+            #MAIN {
+                justify-content : center;
+                align-items : center;
+                min-height : 100vh;
+            }
+
+            .gameStartBtn {
+                margin-top : 50px;
+                width : 300px;
+                height : 100px;
+                background-color : #FA8EE5;
+                line-height : 100px;
+                cursor : pointer;
+                border-radius : 20px;
+                text-align : center;
+            }
+
+            .gameStartSpan {
+                color:white;
+                font-size:30pt;
+                font-weight:bold;
+            }
+        </style>
+    </th:block>
+</head>
+<body>
+    <div class="container" layout:fragment="content" id="MAIN">
+        <div th:align="center" class="mt-5">
+            <div class="mvp_div">
+                <span class="bug_span">M V P 관종글</span>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 g-4" style="margin: 0; padding: 0;">
+                <div class="col">
+                    <div class="card h-100 mvp_card" style="cursor: pointer">
+                        <img th:src="@{/img/image_test.png}" width="100%" height="200px">
+                        <div th:align="left" class="card-body">
+                            <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                            <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                            <br>
+                            <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                            <span class="bodySpan-2 me-1">121</span>
+                            <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                            <span class="bodySpan-2 me-1">150</span>
+                            <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                            <span class="bodySpan-2 me-1">3,100</span>
+                            <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                            <p class="card-text shortText-3">글 내용입니다 글 내용입니다 글내용입니다 글 내용입니다 글 내용입니다 글내용입니다 글 내용입니다 글 내용입니다 글내용입니다</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 mvp_card" style="cursor: pointer">
+                        <img th:src="@{/img/image_test2.png}" width="100%" height="200px">
+                        <div th:align="left" class="card-body">
+                            <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                            <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                            <br>
+                            <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                            <span class="bodySpan-2 me-1">121</span>
+                            <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                            <span class="bodySpan-2 me-1">150</span>
+                            <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                            <span class="bodySpan-2 me-1">3,100</span>
+                            <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                            <p class="card-text shortText-3">글 내용입니다 글 내용입니다 글내용입니다 글 내용입니다 글 내용입니다 글내용입니다 글 내용입니다 글 내용입니다 글내용입니다</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 mvp_card" style="cursor: pointer">
+                        <img th:src="@{/img/image_test3.png}" width="100%" height="200px">
+                        <div th:align="left" class="card-body">
+                            <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                            <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                            <br>
+                            <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                            <span class="bodySpan-2 me-1">121</span>
+                            <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                            <span class="bodySpan-2 me-1">150</span>
+                            <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                            <span class="bodySpan-2 me-1">3,100</span>
+                            <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                            <p class="card-text shortText-3">글 내용입니다 글 내용입니다 글내용입니다 글 내용입니다 글 내용입니다 글내용입니다 글 내용입니다 글 내용입니다 글내용입니다</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col">
+                    <div class="list">
+                        <div class="menu_div">
+                            <span class="bug_span">베스트 관종글</span>
+                        </div>
+                        <ul th:align="left" class="list-group list-group-flush">
+                            <li class="list-group-item mt-3 board-pointer" style="cursor: pointer;">
+                                <div class="row">
+                                    <div th:align="left" class="col">
+                                        <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                                        <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                                    </div>
+                                    <div th:align="right" class="col">
+                                        <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">121</span>
+                                        <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">150</span>
+                                        <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">3,100</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                                </div>
+                            </li>
+                            <li class="list-group-item mt-3 board-pointer" style="cursor: pointer;">
+                                <div class="row">
+                                    <div th:align="left" class="col">
+                                        <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                                        <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                                    </div>
+                                    <div th:align="right" class="col">
+                                        <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">121</span>
+                                        <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">150</span>
+                                        <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">3,100</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                                </div>
+                            </li>
+                            <li class="list-group-item mt-3 board-pointer" style="cursor: pointer;">
+                                <div class="row">
+                                    <div th:align="left" class="col">
+                                        <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                                        <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                                    </div>
+                                    <div th:align="right" class="col">
+                                        <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">121</span>
+                                        <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">150</span>
+                                        <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">3,100</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                                </div>
+                            </li>
+                            <li class="list-group-item mt-3 board-pointer" style="cursor: pointer;">
+                                <div class="row">
+                                    <div th:align="left" class="col">
+                                        <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                                        <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                                    </div>
+                                    <div th:align="right" class="col">
+                                        <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">121</span>
+                                        <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">150</span>
+                                        <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">3,100</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                                </div>
+                            </li>
+                            <li class="list-group-item mt-3 board-pointer" style="cursor: pointer;">
+                                <div class="row">
+                                    <div th:align="left" class="col">
+                                        <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                                        <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                                    </div>
+                                    <div th:align="right" class="col">
+                                        <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">121</span>
+                                        <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">150</span>
+                                        <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">3,100</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="list">
+                        <div class="menu_div">
+                            <span class="bug_span">자유글</span>
+                        </div>
+                        <ul th:align="left" class="list-group list-group-flush">
+                            <li class="list-group-item mt-3 board-pointer" style="cursor: pointer;">
+                                <div class="row">
+                                    <div th:align="left" class="col">
+                                        <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                                        <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                                    </div>
+                                    <div th:align="right" class="col">
+                                        <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">121</span>
+                                        <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">150</span>
+                                        <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">3,100</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                                </div>
+                            </li>
+                            <li class="list-group-item mt-3 board-pointer" style="cursor: pointer;">
+                                <div class="row">
+                                    <div th:align="left" class="col">
+                                        <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                                        <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                                    </div>
+                                    <div th:align="right" class="col">
+                                        <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">121</span>
+                                        <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">150</span>
+                                        <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">3,100</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                                </div>
+                            </li>
+                            <li class="list-group-item mt-3 board-pointer" style="cursor: pointer;">
+                                <div class="row">
+                                    <div th:align="left" class="col">
+                                        <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                                        <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                                    </div>
+                                    <div th:align="right" class="col">
+                                        <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">121</span>
+                                        <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">150</span>
+                                        <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">3,100</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                                </div>
+                            </li>
+                            <li class="list-group-item mt-3 board-pointer" style="cursor: pointer;">
+                                <div class="row">
+                                    <div th:align="left" class="col">
+                                        <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                                        <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                                    </div>
+                                    <div th:align="right" class="col">
+                                        <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">121</span>
+                                        <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">150</span>
+                                        <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">3,100</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                                </div>
+                            </li>
+                            <li class="list-group-item mt-3 board-pointer" style="cursor: pointer;">
+                                <div class="row">
+                                    <div th:align="left" class="col">
+                                        <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="25px" height="25px" class="rounded-circle">
+                                        <span class="bodySpan-1 ms-1">오빠만미더덕</span>
+                                    </div>
+                                    <div th:align="right" class="col">
+                                        <img th:src="@{/img/attention.png}" alt="attention" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">121</span>
+                                        <img th:src="@{/img/comment.png}" alt="comment" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">150</span>
+                                        <img th:src="@{/img/view.png}" alt="view" width="20px" height="20px">
+                                        <span class="bodySpan-2 me-1">3,100</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h5 class="card-title mt-1 shortText-1">글 제목입니다 글 제목입니다 글 제목입니다</h5>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

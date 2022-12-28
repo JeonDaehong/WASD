@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <div class="header sticky-top" th:fragment="commonHeader" style="text-align: center;">
+      <header class="p-3 mb-3 border-bottom" style="background-color: white; border-bottom: solid 3px #D3D3D3;">
+          <div class="container">
+              <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                  <a th:href="@{/}">
+                      <img th:src="@{/img/web_logo.png}" id="WEB_LOGO" alt="web_logo" width="180px" height="50px" style="cursor: pointer;">
+                  </a>
+                  <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="margin-left: 30px;">
+                      <li><a href="#" class="nav-link px-2 header_span">공지사항</a></li>
+                      <li><a href="#" class="nav-link px-2 header_span">MVP관종</a></li>
+                      <li><a href="#" class="nav-link px-2 header_span">베스트관종</a></li>
+                      <li><a href="#" class="nav-link px-2 header_span">자유글</a></li>
+                      <li><a href="#" class="nav-link px-2 header_span">AI그림</a></li>
+                  </ul>
+                  <span class="nav-link px-2 login_span">로그인 해줘</span>
+                  <div class="dropdown text-end" style="margin-left: 10px;">
+                      <a href="javascript:void(0)" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                          <img th:src="@{/img/basic_profile.png}" alt="basic_profile" width="32px" height="32px" class="rounded-circle">
+                      </a>
+                      <ul class="dropdown-menu text-small" style="width: 400px;">
+                          <li class="mt-2" th:align="center">
+                              <div class="row">
+                                  <div class="col">
+                                      <div th:align="center" class="profile_button-on ms-5">
+                                          <span class="bug_span">로그인</span>
+                                      </div>
+                                  </div>
+                                  <div class="col">
+                                      <div th:align="center" class="profile_button">
+                                          <span class="bug_span">회원가입</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </li>
+                          <li>
+                              <hr>
+                          </li>
+                          <li th:align="center">
+                              <div th:if="${session.currentUser eq null}">
+                                 <span class="bodySpan-1" style="position: relative; bottom: 5px;">SNS 로그인</span>
+                              </div>
+                          </li>
+                          <li th:align="center" class="mt-1">
+                              <div th:if="${session.currentUser eq null}">
+                                  <div style="display: inline-block;">
+                                      <a th:href="${apiURL}"><img th:src="@{/img/naver_icon.png}" width="42px" height="42px" class="rounded-circle me-5" style="cursor: pointer;"></a>
+                                  </div>
+                                  <div style="display: inline-block;">
+                                      <img th:src="@{/img/kakao_icon.png}" width="42px" height="42px" class="rounded-circle me-5" style="cursor: pointer;">
+                                  </div>
+                                  <div style="display: inline-block;">
+                                      <img th:src="@{/img/google_icon.png}" width="42px" height="42px" class="rounded-circle" style="cursor: pointer;">
+                                  </div>
+                              </div>
+                              <div th:if="${session.currentUser ne null}">
+                                  <pre th:text="${session.currentUser}"></pre>
+                                  <a th:href="${'/naver/getProfile?accessToken=' + session.currentAT}">Get User's Profile</a>
+                                  <!--
+                                  <a th:href="${'/naver/refreshToken?refreshToken=' + session.currentRT}">Refresh Token</a>
+                                  <a th:href="${'/naver/deleteToken?accessToken=' + session.currentAT}">Delete Token</a>
+                                  -->
+                                  <a th:href="${'/naver/invalidate'}">로그아웃</a>
+                              </div>
+                          </li>
+                          <li th:align="center" class="mt-5">
+                              <div th:if="${session.currentUser eq null}">
+                                <a href="javascript:void(0)" class="bodySpan-1" style="position: relative; bottom: 5px;">아이디/비밀번호 찾기</a>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </header>
+  </div>
+</html>

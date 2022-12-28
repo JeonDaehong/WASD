@@ -1,0 +1,83 @@
+
+skeleton.png
+size: 1876,1188
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+effect/wep1_effect_1/wep1_effect_00001
+  rotate: false
+  xy: 1485, 2
+  size: 389, 346
+  orig: 2000, 2000
+  offset: 614, 1234
+  index: -1
+effect/wep1_effect_1/wep1_effect_00002
+  rotate: false
+  xy: 2, 194
+  size: 514, 992
+  orig: 2000, 2000
+  offset: 546, 512
+  index: -1
+effect/wep1_effect_1/wep1_effect_00003
+  rotate: false
+  xy: 2, 194
+  size: 514, 992
+  orig: 2000, 2000
+  offset: 546, 512
+  index: -1
+effect/wep1_effect_1/wep1_effect_00004
+  rotate: false
+  xy: 518, 318
+  size: 498, 868
+  orig: 2000, 2000
+  offset: 560, 509
+  index: -1
+effect/wep1_effect_1/wep1_effect_00005
+  rotate: false
+  xy: 518, 318
+  size: 498, 868
+  orig: 2000, 2000
+  offset: 560, 509
+  index: -1
+effect/wep1_effect_1/wep1_effect_00006
+  rotate: false
+  xy: 1018, 335
+  size: 465, 851
+  orig: 2000, 2000
+  offset: 584, 509
+  index: -1
+effect/wep1_effect_1/wep1_effect_00007
+  rotate: false
+  xy: 1018, 335
+  size: 465, 851
+  orig: 2000, 2000
+  offset: 584, 509
+  index: -1
+effect/wep1_effect_1/wep1_effect_00008
+  rotate: false
+  xy: 1485, 350
+  size: 387, 836
+  orig: 2000, 2000
+  offset: 641, 510
+  index: -1
+effect/wep1_effect_1/wep1_effect_00009
+  rotate: false
+  xy: 1485, 350
+  size: 387, 836
+  orig: 2000, 2000
+  offset: 641, 510
+  index: -1
+effect/wep1_effect_1/wep1_effect_00011
+  rotate: true
+  xy: 518, 59
+  size: 257, 708
+  orig: 2000, 2000
+  offset: 666, 516
+  index: -1
+effect/wep1_effect_1/wep1_effect_00010
+  rotate: true
+  xy: 518, 59
+  size: 257, 708
+  orig: 2000, 2000
+  offset: 666, 516
+  index: -1
