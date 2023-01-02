@@ -49,11 +49,12 @@ public class MainController extends AbstractController {
         return mv;
     }
 
+    // Wasd 게임으로 이동
     @GetMapping(path = "/wasdGame")
     public ModelAndView WasdGame() {
 
         ModelAndView mv = new ModelAndView("wasd");
-
+        
         return mv;
     }
 
