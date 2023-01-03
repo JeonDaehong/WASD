@@ -9,15 +9,21 @@ const SpinePlugin = {
 // Main Game (WASD)
 const gameConfig = {
     type: Phaser.AUTO,
-    parent: "wasd",
-    width: 1280,
-    height: 800,
+    scale: {
+        _mode: Phaser.Scale.FIT,
+        parent: 'wasd',
+        width: 800,
+        height: 600
+    },
     backgroundColor: "#ffffff",
     scene: [
         //WASD_LOGO,
         //WASD_LOADING,
         STAGE_1
     ],
+    dom: {
+        createContainer: true
+    },
     physics: {
         default: 'arcade',
         arcade: {
