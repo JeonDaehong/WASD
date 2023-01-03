@@ -50,10 +50,10 @@ public class MainController extends AbstractController {
     }
 
     // Wasd 게임으로 이동
-    @GetMapping(path = "/wasdGame")
+    @GetMapping(path = "/wasdGame/towerDefense")
     public ModelAndView WasdGame() {
 
-        ModelAndView mv = new ModelAndView("wasd");
+        ModelAndView mv = new ModelAndView("towerDefense/wasd_towerDefense");
         
         return mv;
     }
