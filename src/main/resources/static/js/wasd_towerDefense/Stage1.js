@@ -63,13 +63,11 @@ export class STAGE_1 extends Phaser.Scene
 
         this.input.on('pointerover', function (event, gameObjects) {
 
-            gameObjects.tiles.setTint(0xff0000);
 
         });
 
         this.input.on('pointerout', function (event, gameObjects) {
 
-            gameObjects.tiles.clearTint();
 
         });
 
