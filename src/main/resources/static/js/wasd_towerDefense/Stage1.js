@@ -1,13 +1,15 @@
 // Stage1 Scene
 export class STAGE_1 extends Phaser.Scene
 {
-    constructor(STAGE_1, map, cursors, controls, selectedTile)
+    constructor(STAGE_1, map, cursors, controls, selectedTile, layer, marker)
     {
         super({ key: 'STAGE_1' });
         this.map = map;
         this.cursors = cursors;
         this.controls = controls;
         this.selectedTile = selectedTile;
+        this.layer = layer;
+        this.marker = marker;
     }
 
     preload()
@@ -19,28 +21,50 @@ export class STAGE_1 extends Phaser.Scene
     {
         // 타일 맵
         const level = [
-            [  0,   0,   0,   0,   0,   6,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0 ],
-            [  0,   0,   0,   0,   0,   6,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0 ],
-            [  0,   0,   0,   0,   0,   6,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0 ],
-            [  0,   0,   0,   0,   0,   6,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0 ],
-            [  0,   0,   0,   0,   0,   6,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0 ],
-            [  0,   0,   0,   0,   0,   6,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0 ],
-            [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0 ],
-            [  0,   0,   0,   0,   0,   6,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0 ],
-            [  0,   0,   0,   0,   0,   6,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0 ],
-            [  0,   0,   0,   0,   0,   6,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0 ],
-            [  0,   0,   0,   0,   0,   6,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0 ]
+            [  7,   2,   7,   7,   7,   7,   7,   7,   7,   7,   7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   2,   7,   7,   7,   7,   7,   7,   7,   7,   7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   4,   1,   3,   7,   7,   7,   7,   7,   7,   7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  1 ],
+            [  7,   7,   7,   2,   7,   7,   7,   7,   7,   7,   7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   2,   7,   7,   7,   7,   7,   7,   7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   2,   7,   7,   7,   7,   7,   7,   7,  9,  9,  9,  9,  9,  9,  9,   9,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   2,   7,   7,   6,   1,   3,   7,   7,  9,  10,  10,  10,  10,  10,  9,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   2,   7,   7,   2,   7,   2,   7,   7,  9,  10,  14,  14,  14,  10,  9,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   2,   7,   7,   2,   7,   4,   1,   1,  9,  10,  14,  14,  14,  10,  9,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   2,   7,   7,   2,   7,   7,   7,   7,  9,  13,  13,  13,  13,  13,  9,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   2,   7,   7,   2,   7,   7,   7,   7,  9,  12,  12,  12,  12,  12,  9,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   4,   1,   1,   5,   7,   7,   7,   7,  9,  9,   9,   9,   9,   9,   9,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   7,   7,   7,   7,   7,   7,   7,   7,  7,  7,   7,   7,   7,   7,   7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   7,   7,   7,   7,   7,   7,   7,   7,  7,  7,   7,   7,   7,   7,   7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   7,   7,   7,   7,   7,   7,   7,   7,  7,  7,   7,   7,   7,   7,   7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  1,   1,   1,   1,   1,   1,   1,   1,   3,   7,   7,  7,  7,   7,   7,   7,   7,   7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   7,   7,   7,   7,   7,   4,   1,   1,  1,  1,   1,   1,   7,   7,   7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7 ],
+            [  7,   7,   7,   7,   7,   7,   7,   7,   7,   7,   7,  7,  7,   7,   7,   7,   7,   7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  2,  7,  7 ]
         ];
 
         // 맵 전체 크기
-        this.cameras.main.setBounds(0, 0, 2000, 2000);
+        this.cameras.main.setBounds(0, 0, 2560, 1440);
+
+        // 최초 카메라 크기
+        this.cameras.main._zoomX = 0.5;
+        this.cameras.main._zoomY = 0.5;
+
+        // 카메라 최대 줌 인, 줌 아웃 크기
+        this.cameras.main.maxZoom = 1.5;
+        this.cameras.main.minZoom = 0.5;
 
         // 맵 생성
-        this.map = this.make.tilemap({ data: level, tileWidth: 80, tileHeight: 80 });
+        this.map = this.make.tilemap({ data: level, tileWidth: 80, tileHeight: 80 }); // 타일 1개당 80 x 80
         const tiles = this.map.addTilesetImage("tiles");
-        const layer = this.map.createLayer(0, tiles, 0, 0);
-        layer.setInteractive();
+        this.layer = this.map.createLayer(0, tiles, 0, 0);
+        this.layer.setInteractive();
 
+        console.log(this.map);
+        console.log(tiles);
+        console.log(this.layer);
+
+        this.marker = this.add.graphics();
+        this.marker.lineStyle(2, 0xffffff, 1);
+        console.log(this.marker);
 
         // Key Cursor 선언
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -59,17 +83,20 @@ export class STAGE_1 extends Phaser.Scene
             maxSpeed: 1.0
         };
 
+        this.input.on('wheel', function (pointer, gameObjects, deltaX, deltaY) {
+
+            if (deltaY > 0) {
+                this.cameras.main._zoomX -= 0.1;
+                this.cameras.main._zoomY -= 0.1;
+            } else {
+                this.cameras.main._zoomX += 0.1;
+                this.cameras.main._zoomY += 0.1;
+            }
+
+        });
+
         this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
 
-        this.input.on('pointerover', function (event, gameObjects) {
-
-
-        });
-
-        this.input.on('pointerout', function (event, gameObjects) {
-
-
-        });
 
 
     }
@@ -80,6 +107,21 @@ export class STAGE_1 extends Phaser.Scene
     {
         // Key Cursor Update
         this.controls.update(delta);
+
+        // Min Zoom Out Check
+        if (this.cameras.main.zoom < this.cameras.main.minZoom) {
+            this.cameras.main.zoom = 0.5;
+        }
+
+        // Max Zoom In Check
+        if (this.cameras.main.zoom > this.cameras.main.maxZoom) {
+            this.cameras.main.zoom = 1.5;
+        }
+
+        // 현재 마우스 위치가, 몇 번째 Tile 인지 확인하는 코드
+        let mouseX = this.input.mousePointer.worldX;
+        let mouseY = this.input.mousePointer.worldY;
+        let tile = this.map.getTileAtWorldXY(mouseX, mouseY, true, this.cameras.main, this.layer);
 
     }
 
