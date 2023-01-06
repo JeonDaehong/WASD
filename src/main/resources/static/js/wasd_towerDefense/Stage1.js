@@ -12,6 +12,10 @@ export class STAGE_1 extends Phaser.Scene
         this.marker = marker;
     }
 
+    updateMaker() {
+        this.marker.x = this.layer.getTileX(game.input.activePointer.worldX) * 80;
+        this.marker.y = this.layer.getTileY(game.input.activePointer.worldY) * 80;
+    }
     preload()
     {
         this.load.image('tiles', '/assets/TowerDefense/Tiles/MAP_SHEET.png');
@@ -58,13 +62,9 @@ export class STAGE_1 extends Phaser.Scene
         this.layer = this.map.createLayer(0, tiles, 0, 0);
         this.layer.setInteractive();
 
-        console.log(this.map);
-        console.log(tiles);
-        console.log(this.layer);
-
         this.marker = this.add.graphics();
         this.marker.lineStyle(2, 0xffffff, 1);
-        console.log(this.marker);
+        this.marker.strokeRect(0, 0, this.map.tileWidth, this.map.tileHeight);
 
         // Key Cursor 선언
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -97,8 +97,6 @@ export class STAGE_1 extends Phaser.Scene
 
         this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
 
-
-
     }
 
 
@@ -119,9 +117,16 @@ export class STAGE_1 extends Phaser.Scene
         }
 
         // 현재 마우스 위치가, 몇 번째 Tile 인지 확인하는 코드
-        let mouseX = this.input.mousePointer.worldX;
-        let mouseY = this.input.mousePointer.worldY;
-        let tile = this.map.getTileAtWorldXY(mouseX, mouseY, true, this.cameras.main, this.layer);
+        //let mouseX = this.input.mousePointer.worldX;
+        //let mouseY = this.input.mousePointer.worldY;
+        //let tile = this.map.getTileAtWorldXY(mouseX, mouseY, true, this.cameras.main, this.layer);
+
+        let worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
+        let pointerTileX = this.map.worldToTileX(worldPoint.x);
+        let pointerTileY = this.map.worldToTileY(worldPoint.y);
+
+        this.marker.x = this.map.tileToWorldX(pointerTileX);
+        this.marker.y = this.map.tileToWorldY(pointerTileY);
 
     }
 
