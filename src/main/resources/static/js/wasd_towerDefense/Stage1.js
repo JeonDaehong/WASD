@@ -12,6 +12,7 @@ export class STAGE_1 extends Phaser.Scene
         this.selectedTile = selectedTile;
         this.layer = layer;
         this.marker = marker;
+        this.enemy = enemy;
     }
 
     updateMaker() {
@@ -103,15 +104,8 @@ export class STAGE_1 extends Phaser.Scene
 
 
         // enemy
-        let enemy =  new EnemyObject(this, 40, 1250, 'enemy_1.enemy_1', 'enemy1_walk_R', true);
+        this.enemy =  new EnemyObject(this, 40, 1250, 'enemy_1.enemy_1', 'enemy1_walk_R', true);
 
-
-        // enemy path 1
-        let points = [ 50, 400, 200, 200, 350, 300, 500, 500, 700, 400 ];
-        let curve = new Phaser.Curves.Spline(points);
-        let graphics = this.add.graphics();
-        let enemy1 = this.add.follower(curve, 40, 1250, enemy);
-        enemy1.startFollow(4000);
     }
 
 
@@ -120,6 +114,8 @@ export class STAGE_1 extends Phaser.Scene
     {
         // Key Cursor Update
         this.controls.update(delta);
+
+        this.enemy.move(-4); // Temp Enemy Move
 
         // Min Zoom Out Check
         if (this.cameras.main.zoom < this.cameras.main.minZoom) {
