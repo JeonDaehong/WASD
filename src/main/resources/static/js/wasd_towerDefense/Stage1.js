@@ -1,7 +1,9 @@
+import { EnemyObject } from "./EnemyObject.js"
+
 // Stage1 Scene
 export class STAGE_1 extends Phaser.Scene
 {
-    constructor(STAGE_1, map, cursors, controls, selectedTile, layer, marker)
+    constructor(STAGE_1, map, cursors, controls, selectedTile, layer, marker, enemy)
     {
         super({ key: 'STAGE_1' });
         this.map = map;
@@ -19,6 +21,8 @@ export class STAGE_1 extends Phaser.Scene
     preload()
     {
         this.load.image('tiles', '/assets/TowerDefense/Tiles/MAP_SHEET.png');
+        this.load.setPath('/assets/TowerDefense/Enemy/Enemy_1/');
+        this.load.spine('enemy_1', 'enemy1.json', ['enemy1.atlas'], true);
     }
 
     create()
@@ -48,14 +52,6 @@ export class STAGE_1 extends Phaser.Scene
         // 맵 전체 크기
         this.cameras.main.setBounds(0, 0, 2560, 1440);
 
-        // 최초 카메라 크기
-        this.cameras.main._zoomX = 0.5;
-        this.cameras.main._zoomY = 0.5;
-
-        // 카메라 최대 줌 인, 줌 아웃 크기
-        this.cameras.main.maxZoom = 1.5;
-        this.cameras.main.minZoom = 0.5;
-
         // 맵 생성
         this.map = this.make.tilemap({ data: level, tileWidth: 80, tileHeight: 80 }); // 타일 1개당 80 x 80
         const tiles = this.map.addTilesetImage("tiles");
@@ -65,6 +61,14 @@ export class STAGE_1 extends Phaser.Scene
         this.marker = this.add.graphics();
         this.marker.lineStyle(2, 0xffffff, 1);
         this.marker.strokeRect(0, 0, this.map.tileWidth, this.map.tileHeight);
+
+        // 최초 카메라 크기
+        this.cameras.main._zoomX = 1;
+        this.cameras.main._zoomY = 1;
+
+        // 카메라 최대 줌 인, 줌 아웃 크기
+        this.cameras.main.maxZoom = 1.5;
+        this.cameras.main.minZoom = 0.5;
 
         // Key Cursor 선언
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -81,6 +85,7 @@ export class STAGE_1 extends Phaser.Scene
             maxSpeed: 1.0
         };
 
+        // 마우스 휠 줌인 줌아웃
         this.input.on('wheel', function (pointer, gameObjects, deltaX, deltaY) {
 
             if (deltaY > 0) {
@@ -93,15 +98,20 @@ export class STAGE_1 extends Phaser.Scene
 
         });
 
+        // Key 가동
         this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
 
 
-        // Path 1
-        let points1 = [];
-        let graphics1 = this.add.graphics();
-        let curve = new Phaser.Curves.Spline(points1);
+        // enemy
+        let enemy =  new EnemyObject(this, 40, 1250, 'enemy_1.enemy_1', 'enemy1_walk_R', true);
 
 
+        // enemy path 1
+        let points = [ 50, 400, 200, 200, 350, 300, 500, 500, 700, 400 ];
+        let curve = new Phaser.Curves.Spline(points);
+        let graphics = this.add.graphics();
+        let enemy1 = this.add.follower(curve, 40, 1250, enemy);
+        enemy1.startFollow(4000);
     }
 
 
