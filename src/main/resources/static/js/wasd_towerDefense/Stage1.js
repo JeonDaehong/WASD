@@ -115,7 +115,7 @@ export class STAGE_1 extends Phaser.Scene
         // Key Cursor Update
         this.controls.update(delta);
 
-        this.enemy.move(-4); // Temp Enemy Move
+        this.enemy.move(-5); // Temp Enemy Move
 
         // Min Zoom Out Check
         if (this.cameras.main.zoom < this.cameras.main.minZoom) {
